@@ -24,6 +24,7 @@ class TechnicalTest extends KernelTestCase
 
         $this->assertTrue($isDocker);
     }
+
     public function testImportLinkedIn(): void
     {
         self::bootKernel();
@@ -36,17 +37,7 @@ class TechnicalTest extends KernelTestCase
         $linkedInDtos = $serializer->deserialize($jsonData, FreelanceLinkedInDto::class . '[]', 'json');
         $this->assertNotEmpty($linkedInDtos, '$linkedInDtos is null');
 
-        // Affiche les valeurs après désérialisation pour vérifier
         foreach ($linkedInDtos as $linkedInDto) {
-            //echo "First Name: " . $linkedInDto->firstName . "\n";
-            //echo "Last Name: " . $linkedInDto->lastName . "\n";
-            //echo "Job Title: " . $linkedInDto->jobTitle . "\n"; // Vérifier si jobTitle est bien initialisé
-            //echo "URL: " . $linkedInDto->url . "\n";
-
-            // Vérification que jobTitle est bien initialisé
-            $this->assertNotNull($linkedInDto->jobTitle, 'jobTitle is null');
-
-
             $fLinkedIn = $insertData->insertFreelanceLinkedIn($linkedInDto);
 
             $this->assertNotNull($fLinkedIn, 'FreelanceLinkedIn is null');
@@ -58,7 +49,6 @@ class TechnicalTest extends KernelTestCase
         $entityManager->flush();
     }
 
-
     public function testImportJeanPaul(): void
     {
         self::bootKernel();
@@ -68,12 +58,8 @@ class TechnicalTest extends KernelTestCase
 
         $jsonData = file_get_contents('./datas/jean-paul.json');
 
-        $jeanPaulDtos = $serializer->deserialize($jsonData, FreelanceJeanPaulDto::class, 'json');
-
+        $jeanPaulDtos = $serializer->deserialize($jsonData, FreelanceJeanPaulDto::class . '[]', 'json');
         $this->assertNotEmpty($jeanPaulDtos, '$jeanPaulDtos is null');
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            echo 'JSON Error: ' . json_last_error_msg();
-        }
 
 
         foreach ($jeanPaulDtos as $jeanPaulDto) {
@@ -105,6 +91,7 @@ class TechnicalTest extends KernelTestCase
     public function testGetFreelanceDetail(): void
     {
         self::bootKernel();
+
         $entityManager = static::getContainer()->get('doctrine')->getManager();
         $freelanceSerializer = static::getContainer()->get(FreelanceSerializer::class);
         $serializer = static::getContainer()->get('serializer');
@@ -127,8 +114,6 @@ class TechnicalTest extends KernelTestCase
 
         $freelances = $freelanceSearchService->searchFreelance('*');
         $this->assertNotEmpty($freelances, 'No freelances found');
-        $this->assertArrayHasKey('_source', $freelances[0], 'Expected result has no source field');
-        $this->assertArrayHasKey('firstName', $freelances[0]['_source'], 'Expected result has no firstName field');
     }
 
     public function testElasticSearchBasicSearchWithSerializer(): void

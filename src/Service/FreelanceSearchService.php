@@ -89,7 +89,7 @@ readonly class FreelanceSearchService
             ];
             // Log de l'appel
             $this->logger->info("Searching for query: " . $query);
-            // Effectuer la recherche dans Elasticsearch
+
             $results = $this->elasticsearchClient->search($params);
             // Log des résultats de la recherche
             $this->logger->info("Search results:", $results);
