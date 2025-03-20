@@ -11,6 +11,11 @@ RUN install-php-extensions zip intl fileinfo
 RUN install-php-extensions pdo redis mysqli pdo_mysql
 RUN install-php-extensions gd
 
+# Installer l'extension AMQP
+# Installation de l'extension AMQP 
+RUN apk add --no-cache rabbitmq-c-dev && \
+    install-php-extensions amqp
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 WORKDIR /var/www
