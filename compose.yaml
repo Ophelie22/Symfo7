@@ -62,15 +62,19 @@ services:
     ports:
       - 15676:15672
       - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.26
     ports:
-      - 9201:9200
+      - 9200:9200
+      - 9300:9300
     environment:
       - discovery.type=single-node
-      - http.port=9200
-      - ES_JAVA_OPTS=-Xms2g -Xmx8g
+    # - http.port=9200
+    # - ES_JAVA_OPTS=-Xms2g -Xmx8g
 
 networks:
   app_network:
