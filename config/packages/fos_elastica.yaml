@@ -6,11 +6,20 @@ fos_elastica:
   indexes:
     freelance:
       properties:
-        firstName: ~
-        lastName: ~
-        jobTitle: ~
-        linkedinUrl: ~
-        fullName: ~
+        firstName:
+          type: text
+          analyzer: standard
+        lastName:
+          type: text
+          analyzer: standard
+        jobTitle:
+          type: text
+          analyzer: standard
+        linkedinUrl:
+          type: keyword
+        fullName:
+          type: text
+          analyzer: standard
       persistence:
         driver: orm
         model: App\Entity\FreelanceConso

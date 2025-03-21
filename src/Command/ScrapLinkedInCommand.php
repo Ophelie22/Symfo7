@@ -28,7 +28,7 @@ class ScrapLinkedInCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $jsonData = file_get_contents('./datas/jean-paul.json');
+        #$jsonData = file_get_contents('./datas/jean-paul.json');
         $jsonData = file_get_contents('./datas/linkedin.json');
 
         $linkedInDtos = $this->serializer->deserialize($jsonData, FreelanceLinkedInDto::class . '[]', 'json');

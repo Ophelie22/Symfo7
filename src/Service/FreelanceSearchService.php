@@ -73,7 +73,7 @@ readonly class FreelanceSearchService
             $health = $this->elasticsearchClient->cluster()->health();
             dd([
                 'health' => $health,
-                'host' => (['elasticsearch:9200'])
+                'host' => ('elasticsearch:9200')
             ]);
             $params = [
                 'index' => 'freelances',

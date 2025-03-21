@@ -6,6 +6,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class FreelanceJeanPaulDto
 {
+    public ?\DateTimeInterface $createdAt = null;
+    public ?\DateTimeInterface $updatedAt = null;
+    #public ?string $linkedInUrl = null;
+
     public function __construct(
         #[Assert\NotBlank]
         #[Assert\NotNull]
