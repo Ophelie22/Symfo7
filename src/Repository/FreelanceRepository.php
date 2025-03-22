@@ -6,6 +6,7 @@ use App\Entity\Freelance;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use JetBrains\PhpStorm\ArrayShape;
+
 /**use JetBrains\PhpStorm\ArrayShape;
 
  * @extends ServiceEntityRepository<Freelance>
@@ -17,23 +18,29 @@ class FreelanceRepository extends ServiceEntityRepository
         parent::__construct($registry, Freelance::class);
     }
 
-//    /**
-//     * @return Freelance[] Returns an array of Freelance objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Freelance[] Returns an array of Freelance objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('f.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
     public function findTheMostUseFirstname(): ?array
     {
-        return [];
+        return $this->createQueryBuilder('f')
+            ->select('f.firstname, COUNT(f.firstname) as count')
+            ->groupBy('f.firstname')
+            ->orderBy('count', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
