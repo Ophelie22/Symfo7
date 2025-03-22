@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
-
+use Symfony\Component\Routing\Requirement\Requirement;
 
 
 
@@ -24,6 +24,13 @@ class FreelanceController extends AbstractController
     {
         $freelanceConsos = $searchService->searchFreelance($dto->query);
         return $this->json($freelanceConsos, Response::HTTP_OK, [], ["groups" => "freelance_conso"]);
+    }
+
+    #[Route("freelance/{id}", requirements: ["id" => Requirement::DIGITS])]
+
+    public function show(Freelance $freelance)
+    {
+        return  $this->json($freelance, 200, [], ["groups" => "freelance_detail"]);
     }
 }
 

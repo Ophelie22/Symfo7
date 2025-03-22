@@ -6,29 +6,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class FreelanceJeanPaulDto
 {
-    public ?\DateTimeInterface $createdAt = null;
-    public ?\DateTimeInterface $updatedAt = null;
-    #public ?string $linkedInUrl = null;
 
-    public function __construct(
-        #[Assert\NotBlank]
-        #[Assert\NotNull]
-        public string $firstName,
+    #public ?string $linkedInUrl = null
 
-        #[Assert\NotBlank]
-        #[Assert\NotNull]
-        public string $lastName,
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    public string $firstName;
 
-        #[Assert\NotBlank]
-        #[Assert\NotNull]
-        public string $jobTitle, // Assurez-vous que jobTitle est initialisé
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    public string $lastName;
 
-        #[Assert\Type('integer')]
-        public int $jeanPaulId
-    ) {}
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    public string $jobTitle;
 
-    public function getNumberOfFreelancesInJeanPaulWebsiteHomePage(): int
+    #[Assert\Type('integer')]
+    public int $jeanPaulId;
+
+    public function __construct(string $firstName = '', string $lastName = '', string $jobTitle = '', int $jeanPaulId = 0)
     {
-        return 0; // À implémenter selon votre logique métier
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->jobTitle = $jobTitle;
+        $this->jeanPaulId = $jeanPaulId;
     }
 }

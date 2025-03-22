@@ -34,9 +34,4 @@ class FreelanceLinkedInDto
         $this->jobTitle = $jobTitle;
         $this->url = $url;
     }
-
-    public function getNumberOfFreelancesInLinkedInWebsiteHomePage(): int
-    {
-        return 0; // À implémenter selon votre logique métier
-    }
 }
