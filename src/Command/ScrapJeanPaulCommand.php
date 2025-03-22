@@ -33,17 +33,11 @@ class ScrapJeanPaulCommand extends Command
 
         /** @var FreelanceJeanPaulDto $jeanPaulDto */
         foreach ($jeanPaulDtos as $jeanPaulDto) {
-            $io->writeln(sprintf(
-                "Dispatching message for %s %s (Job: %s, Created: %s, Updated: %s)",
-                $jeanPaulDto->firstName,
-                $jeanPaulDto->lastName,
-                $jeanPaulDto->jobTitle,
-                $jeanPaulDto->createdAt ? $jeanPaulDto->createdAt->format('Y-m-d H:i:s') : 'N/A',
-                $jeanPaulDto->updatedAt ? $jeanPaulDto->updatedAt->format('Y-m-d H:i:s') : 'N/A'
-            ));
+            $io->writeln($jeanPaulDto->firstName . ' ' . $jeanPaulDto->lastName . ' ' . $jeanPaulDto->jobTitle . ' ' . $jeanPaulDto->jeanPaulId);
             $this->bus->dispatch(new InsertFreelanceJeanPaulMessage($jeanPaulDto));
         }
-        $io->success('All messages have been dispatched.');
+
+
         return Command::SUCCESS;
     }
 }

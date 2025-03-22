@@ -26,4 +26,9 @@ class FreelanceJeanPaulDto
         #[Assert\Type('integer')]
         public int $jeanPaulId
     ) {}
+
+    public function getNumberOfFreelancesInJeanPaulWebsiteHomePage(): int
+    {
+        return 0; // À implémenter selon votre logique métier
+    }
 }

@@ -20,8 +20,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 )]
 class GetNumberOfFreelanceInJeanMichelCommand extends Command
 {
-    public function __construct(private readonly FreelanceManager $freelanceManager)
-    {
+    public function __construct(
+        private readonly FreelanceManager $freelanceManager,
+        private readonly FreelanceJeanPaulDto $freelanceJeanPaulDto,
+        private readonly FreelanceLinkedInDto $freelanceLinkedInDto,
+        private readonly MessageBusInterface $messageBus
+    ) {
         parent::__construct();
     }
 
@@ -30,6 +34,8 @@ class GetNumberOfFreelanceInJeanMichelCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->writeln($this->freelanceManager->getNumberOfFreelancesInJeanMichelWebsiteHomePage() . " freelances");
+        $io->writeln($this->freelanceJeanPaulDto->getNumberOfFreelancesInJeanPaulWebsiteHomePage() . " freelances");
+        $io->writeln($this->freelanceLinkedInDto->getNumberOfFreelancesInLinkedInWebsiteHomePage() . " freelances");
         return Command::SUCCESS;
     }
 }
