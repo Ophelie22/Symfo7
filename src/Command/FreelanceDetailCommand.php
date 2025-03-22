@@ -20,16 +20,15 @@ class FreelanceDetailCommand extends Command
 {
     public function __construct(
         private readonly FreelanceSerializer $freelanceSerializer,
-        private readonly EntityManagerInterface $entityManager)
-    {
+        private readonly EntityManagerInterface $entityManager
+    ) {
         parent::__construct();
     }
 
     protected function configure(): void
     {
         $this
-            ->addArgument('freelanceId', InputArgument::REQUIRED, 'Freelance ID')
-        ;
+            ->addArgument('freelanceId', InputArgument::REQUIRED, 'Freelance ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

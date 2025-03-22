@@ -2,7 +2,7 @@
 fos_elastica:
   clients:
     default:
-      url: "%env(ELASTICSEARCH_URL)%"
+      url: "%env(ELASTICSEARCH_URL)%/"
   indexes:
     freelance:
       properties:
